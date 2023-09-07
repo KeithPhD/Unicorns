@@ -10,7 +10,9 @@ import pygame.freetype
 import sys
 import os
 import time
-os.chdir(r'C:\Users\Keith\New folder\Card Games\Card Images')
+script_dir = os.path.dirname(os.path.realpath(__file__))
+
+os.chdir(script_dir)
 
 
 # In[188]:
@@ -20,7 +22,9 @@ class UnoCard:
     def __init__(self, name, typing):
         self.name = name
         self.typing = typing
-        self.image = pygame.image.load(self.name + ".png")
+        image_path = 'Card_Images/' + self.name + ".png"
+        print(f"Attempting to load: {image_path}")
+        self.image = pygame.image.load(image_path)
 
     def __str__(self):
         return f"{self.name} ({self.typing})"
@@ -56,7 +60,7 @@ class UnoGame:
         self.discard = []
         self.limbo = []
         pygame.init()                   # Initialize Pygame
-        self.font = pygame.font.Font(r'C:\Users\Keith\New folder\Card Games\OstrichSans-Heavy\OstrichSans-Heavy.otf', 24)
+        self.font = pygame.font.Font('./OstrichSans-Heavy/OstrichSans-Heavy.otf', 24)
         self.next_time = 0
         self.clock = pygame.time.Clock()
         self.viewing_discard = False
@@ -170,7 +174,7 @@ class UnoGame:
         # Discard pile
         mouse_x, mouse_y = pygame.mouse.get_pos()
         discard_pile_height = self.screen.get_height() / 2 - 150
-        back = pygame.image.load("Black Back of Card.png")
+        back = pygame.image.load("Card_Images/Black Back of Card.png")
         self.screen.blit(pygame.transform.scale(back, (75, 105)), (0, discard_pile_height))
         if pygame.Rect(0, discard_pile_height, 75, 105).collidepoint(mouse_x, mouse_y):
             if not self.viewing_discard:
