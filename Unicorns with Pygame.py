@@ -10,7 +10,7 @@ import pygame.freetype
 import sys
 import os
 import time
-os.chdir(r'C:\Users\Keith\New folder\Card Games\Card Images')
+os.chdir('./Card Images/') #Assuming your images file is in the same directory as project.
 
 
 # In[188]:
